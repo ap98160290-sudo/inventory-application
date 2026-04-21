@@ -60,3 +60,11 @@ export const archiveProduct = (barcode) =>
  */
 export const reactivateProduct = (barcode) =>
   API.put(`/products/reactivate/${barcode}`);
+
+/**
+ * Send a voice command to the backend's advanced fuzzy engine.
+ * GET /products/voice_command?command=...
+ * The backend handles all fuzzy matching, word numbers, garbled STT, etc.
+ */
+export const voiceCommand = (command) =>
+  API.post(`/products/voice_command`, null, { params: { command } });
