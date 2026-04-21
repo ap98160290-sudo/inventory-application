@@ -1,0 +1,141 @@
+/* 🔴 FULL SCREEN CENTER */
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0b0f14;
+}
+
+/* 🔴 CARD */
+.login-card {
+  width: 360px;
+  background: #111827;
+  padding: 35px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+/* 🔴 HEADER */
+.login-header {
+  margin-bottom: 25px;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.app-subtitle {
+  margin: 5px 0 15px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* 🔴 INPUT */
+.login-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #0b0f14;
+  color: #fff;
+  outline: none;
+}
+
+.login-input::placeholder {
+  color: #6b7280;
+}
+
+.login-input:focus {
+  border-color: #3b82f6;
+}
+
+/* 🔴 BUTTON */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 500;
+}
+
+.login-button:hover {
+  background: #2563eb;
+}
+
+.login-button:disabled {
+  background: #374151;
+  cursor: not-allowed;
+}
+
+/* 🔴 LINKS */
+.login-link {
+  margin-top: 12px;
+  display: block;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* 🔴 OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 15, 20, 0.85);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* 🔴 LOADER BOX */
+.loader-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 🔴 SPINNER */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(59, 130, 246, 0.2);
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* 🔴 LOADER TEXT */
+.loader-text {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* 🔴 ANIMATION */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,11 @@
+# Environments
+.env
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node modules (just in case the frontend one fails)
+node_modules/

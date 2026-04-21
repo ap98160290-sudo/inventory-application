@@ -1,0 +1,15 @@
+sqlalchemy
+psycopg2-binary
+python-multipart
+pydantic
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+opencv-python>=4.9.0
+zxing-cpp>=2.2.0
+numpy>=1.26.0
+python-jose>=3.0.0
+passlib>=1.7.0
+bcrypt>=3.2.0
+regex>=2026.4.4
+python-dotenv
