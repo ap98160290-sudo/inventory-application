@@ -1,0 +1,22 @@
+sqlalchemy
+psycopg2-binary
+python-multipart
+pydantic
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+
+
+# opencv-python      = 72.9 MB wheel + 124.7 MB X11/Qt/Mesa/libGL dependencies
+# opencv-python-headless = ~25 MB, no display libs, identical API for barcode scanning
+# This single change shrinks the backend image by ~200 MB and eliminates the
+# 400 Bad Request push failures caused by upload session timeout on large layers.
+opencv-python-headless>=4.9.0
+
+zxing-cpp>=2.2.0
+numpy>=1.26.0
+python-jose>=3.0.0
+passlib>=1.7.0
+bcrypt>=3.2.0
+regex>=2026.4.4
+python-dotenv
+email-validator

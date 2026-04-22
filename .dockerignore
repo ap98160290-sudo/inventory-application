@@ -1,0 +1,17 @@
+# Passwords and Secrets
+.env
+*.env
+
+# Python Virtual Environments
+venv/
+__pycache__/
+*.pyc
+
+# Node/React Stuff
+node_modules/
+frontend/node_modules/
+dist/
+
+# Git history
+.git/
+.gitignore

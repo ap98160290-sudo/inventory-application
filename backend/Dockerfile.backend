@@ -1,0 +1,44 @@
+# ── Stage 1: build dependencies ──────────────────────────────────────────────
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+# Only install what's needed to compile Python packages.
+# Previously included libgl1-mesa-glx, libglib2.0-0 etc. for opencv-python GUI.
+# With opencv-python-headless those are NOT needed — removing them saves ~150 MB
+# in the builder layer and prevents Docker Hub 400 timeout errors on push.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        gcc \
+        libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install --prefix=/install --no-cache-dir -r requirements.txt
+
+
+# ── Stage 2: runtime image ────────────────────────────────────────────────────
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Runtime-only system deps.
+# libpq5  = postgres client (psycopg2-binary still needs the shared lib)
+# No libGL / X11 / Mesa needed — opencv-headless bundles its own minimal libs.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libpq5 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy compiled packages from builder
+COPY --from=builder /install /usr/local
+
+# Copy source
+COPY . .
+
+# Non-root user for security
+RUN useradd -m -u 1001 appuser && chown -R appuser:appuser /app
+USER appuser
+
+EXPOSE 8000
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

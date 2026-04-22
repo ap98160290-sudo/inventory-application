@@ -1,7 +1,10 @@
 import axios from "axios";
 
+// 1. Grab the URL from the Docker environment variable (fallback to localhost:8000)
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+
 const API = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: API_BASE_URL,
 });
 
 // Attach access token to every request
@@ -12,10 +15,6 @@ API.interceptors.request.use((config) => {
   }
   return config;
 });
-
-// ✅ FIX: On 401, try refresh token first — only logout if refresh also fails.
-// Previously it was logging out immediately on every 401 (e.g. expired access token)
-// without ever attempting to get a new access token via the refresh token.
 
 let _isRefreshing = false;          // prevent multiple simultaneous refresh calls
 let _waitQueue    = [];             // requests waiting while refresh is in progress
@@ -60,9 +59,9 @@ API.interceptors.response.use(
       _isRefreshing = true;
 
       try {
-        // Call backend refresh endpoint: POST /auth/refresh_token?refresh_token=...
+        // 2. Use the dynamic API_BASE_URL here instead of hardcoding localhost
         const res = await axios.post(
-          `http://localhost:8000/auth/refresh_token?refresh_token=${encodeURIComponent(refreshToken)}`
+          `${API_BASE_URL}/auth/refresh_token?refresh_token=${encodeURIComponent(refreshToken)}`
         );
 
         const newAccessToken = res.data?.access_token;
